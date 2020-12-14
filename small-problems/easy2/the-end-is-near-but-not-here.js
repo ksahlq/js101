@@ -6,15 +6,7 @@ function penultimate(string) {
 console.log(penultimate("last word") === "last"); // logs true
 console.log(penultimate("Launch School is great!") === "is"); // logs true
 
-/* 
-Edge cases
-- To get the middle word, we need an array that is odd length
-- if not then we have either
-  - an error we can throw  
-  - two words 
-    - string must be at least be two words long 
-*/
-
+// further exploration
 function middleWord(string) {
   let words = string.split(' ');  
   let middleIndex = ((words.length - 1) / 2).toFixed(0);
