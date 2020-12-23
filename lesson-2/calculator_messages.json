@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome to Calculator!",
+  "askNumber1": "What's the first number?",
+  "errorNumber1": "Hmm...that doesn't look like a valid number",
+  "askNumber2": "What's the second number?",
+  "errorNumber2": "Hmm...that doesn't look like a valid number",
+  "askOperation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+  "errorOperation": "Must choose 1, 2, 3 or 4",
+  "again": "Perform another calculation?",
+  "action": "Type 'yes' to continue, or 'no' to exit",
+  "exit": "Exiting program",
+  "result": "The result is: "
+}
