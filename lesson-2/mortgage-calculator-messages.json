@@ -1,0 +1,10 @@
+{
+  "queryLoanAmount": "How much do you wish to loan? ",
+  "invalidLoan": "Ehm...that is not a valid loan number",
+  "queryRate": "What is the Annual Percentage Rate?",
+  "invalidRate": "Sorry, APR needs to be a number between 0 - 100",
+  "queryYears": "How long is the loan duration in years?",
+  "queryMonths": "and in months? (type in 0 if there are none)",
+  "invalidDuration": "Enter a valid number for loan duration",
+  "noInterest": "We see you have selected to have no interest in your loan"
+}
