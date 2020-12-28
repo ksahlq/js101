@@ -13,7 +13,7 @@ function askLoanAmount() {
   prompt(messages.queryLoanAmount);
   let loanAmount = parseFloat(readline.question());
 
-  while (invalidNumber(loanAmount) || (loanAmount === 0)) {
+  while (invalidNumber(loanAmount) || (loanAmount <= 0)) {
     prompt(messages.invalidLoan);
     loanAmount = parseFloat(readline.question());
   }
