@@ -1,27 +1,3 @@
-/*
-Understand the problem:
-  - Input:
-    - the loan amount
-    - the Annual Percentage Rate (APR)
-    - the loan duration
-  - Output:
-    - monthly payment using two decimals
-
-Test Case:
-  $123.00
-  $371.00
-
-Data structure:
-  - number
-  - math operations
-*/
-
-/*
-TODO:
-Calculate:
-  * monthly interest rate
-  * loan duration in months
-*/
 let readline = require('readline-sync');
 let messages = require('./mortgage-calculator-messages.json');
 
@@ -37,7 +13,7 @@ function askLoanAmount() {
   prompt(messages.queryLoanAmount);
   let loanAmount = parseFloat(readline.question());
 
-  while (invalidNumber(loanAmount)) {
+  while (invalidNumber(loanAmount) || (loanAmount === 0)) {
     prompt(messages.invalidLoan);
     loanAmount = parseFloat(readline.question());
   }
@@ -52,7 +28,7 @@ function askAnnualPercentageRate() {
     prompt(messages.invalidRate);
     apr = parseFloat(readline.question());
   }
-  return apr;
+  return apr / 100;
 }
 
 function askLoanDuration() {
@@ -76,16 +52,35 @@ function askLoanDuration() {
 }
 
 function monthlyInterestRate(apr, duration) {
+  if (apr === 0 || duration === 0) {
+    return 0;
+  }
   return apr / duration;
 }
 
-// TODO: perform this after all input has been done and
-function noInterestLoan() {
-  return askLoanAmount() / askLoanDuration();
+function calculate(amount, rate, duration) {
+  if (rate !== 0) {
+    return amount * (rate / (1 - Math.pow((1 + rate), (-duration))));
+  } else if (duration === 0) {
+    return 0;
+  } else {
+    return amount / duration;
+  }
 }
-askLoanAmount();
-/* console.log(`${askAnnualPercentageRate()}%`);
-console.log(`The total loan duration in months is: ${askLoanDuration()}`); */
-let apr = askAnnualPercentageRate();
-let loanDuration = askLoanDuration();
-console.log(`Monthly interest rate: ${monthlyInterestRate(apr, loanDuration)}`);
+
+function meny() {
+  prompt(messages.welcome);
+  let loanAmount = askLoanAmount();
+  let apr = askAnnualPercentageRate();
+  let loanDuration = askLoanDuration();
+  let monthlyRate = monthlyInterestRate(apr, loanDuration);
+  let monthlyPayment = calculate(loanAmount, monthlyRate, loanDuration);
+
+  console.log(`Loan amount: ${loanAmount}`);
+  console.log(`Annual Percentage Rate: ${apr}`);
+  console.log(`Loan duration in months: ${loanDuration}`);
+  console.log(`Montly interest rate: ${monthlyRate}`);
+  console.log(`Montly payment on mortgage is: $${monthlyPayment.toFixed(2)}`);
+}
+
+meny();
