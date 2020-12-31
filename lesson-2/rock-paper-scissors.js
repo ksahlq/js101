@@ -1,18 +1,40 @@
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors'];
+const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function displayWinner(choice, computerChoice) {
-  if ((choice === 'rock' && computerChoice === 'scissors') ||
+function computePlayerAsWinner(choice, computerChoice) {
+  return ((choice === 'scissors' && computerChoice === 'paper') ||
     (choice === 'paper' && computerChoice === 'rock') ||
-    (choice === 'scissors' && computerChoice === 'paper')) {
-    prompt('You win!');
-  } else if ((choice === 'rock' && computerChoice === 'paper') ||
+    (choice === 'rock' && computerChoice === 'lizard') ||
+    (choice === 'lizard' && computerChoice === 'spock') ||
+    (choice === 'spock' && computerChoice === 'scissors') ||
+    (choice === 'scissors' && computerChoice === 'lizard') ||
+    (choice === 'lizard' && computerChoice === 'paper') ||
+    (choice === 'paper' && computerChoice === 'spock') ||
+    (choice === 'spock' && computerChoice === 'rock') ||
+    (choice === 'rock' && computerChoice === 'scissors'));
+}
+
+function computeComputerAsWinner(choice, computerChoice) {
+  return ((choice === 'scissors' && computerChoice === 'rock') ||
+    (choice === 'scissors' && computerChoice === 'spock') ||
     (choice === 'paper' && computerChoice === 'scissors') ||
-    (choice === 'scissors' && computerChoice === 'rock')) {
+    (choice === 'paper' && computerChoice === 'lizard') ||
+    (choice === 'rock' && computerChoice === 'paper') ||
+    (choice === 'rock' && computerChoice === 'spock') ||
+    (choice === 'lizard' && computerChoice === 'rock') ||
+    (choice === 'lizard' && computerChoice === 'scissors') ||
+    (choice === 'spock' && computerChoice === 'lizard') ||
+    (choice === 'spock' && computerChoice === 'paper'));
+}
+
+function displayWinner(choice, computerChoice) {
+  if (computePlayerAsWinner(choice, computerChoice)) {
+    prompt('You win!');
+  } else if (computeComputerAsWinner(choice, computerChoice)) {
     prompt('Computer wins!');
   } else {
     prompt("It's a tie");
