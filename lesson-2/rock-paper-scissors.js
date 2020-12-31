@@ -19,8 +19,7 @@ function displayWinner(choice, computerChoice) {
   }
 }
 
-let answer = '';
-while (answer.toLowerCase() !== 'n') {
+while (true) {
   prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
   let choice = readline.question();
 
@@ -37,10 +36,10 @@ while (answer.toLowerCase() !== 'n') {
   displayWinner(choice, computerChoice);
 
   prompt('Do you want to play again (y/n)?');
-  answer = readline.question().toLowerCase();
-  while (answer[0] !== 'y' && answer[0] !== 'n') {
+  let answer = readline.question().toLowerCase();
+  while (answer[0] !== 'n' && answer[0] !== 'y') {
     prompt('Please enter "y" or "n"');
     answer = readline.question().toLowerCase();
   }
+  if (answer[0].toLowerCase() !== 'y') break;
 }
-answer = 'n';
