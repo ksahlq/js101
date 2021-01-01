@@ -1,34 +1,35 @@
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const VALID_CHOICES = ['r', 'p', 'sc', 'l', 'sp'];
+const WINS = 5;
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
 function computePlayerAsWinner(choice, computerChoice) {
-  return ((choice === 'scissors' && computerChoice === 'paper') ||
-    (choice === 'paper' && computerChoice === 'rock') ||
-    (choice === 'rock' && computerChoice === 'lizard') ||
-    (choice === 'lizard' && computerChoice === 'spock') ||
-    (choice === 'spock' && computerChoice === 'scissors') ||
-    (choice === 'scissors' && computerChoice === 'lizard') ||
-    (choice === 'lizard' && computerChoice === 'paper') ||
-    (choice === 'paper' && computerChoice === 'spock') ||
-    (choice === 'spock' && computerChoice === 'rock') ||
-    (choice === 'rock' && computerChoice === 'scissors'));
+  return ((choice === 'sc' && computerChoice === 'p') ||
+    (choice === 'p' && computerChoice === 'r') ||
+    (choice === 'r' && computerChoice === 'l') ||
+    (choice === 'l' && computerChoice === 'sp') ||
+    (choice === 'sp' && computerChoice === 'sc') ||
+    (choice === 'sc' && computerChoice === 'l') ||
+    (choice === 'l' && computerChoice === 'p') ||
+    (choice === 'p' && computerChoice === 'sp') ||
+    (choice === 'sp' && computerChoice === 'r') ||
+    (choice === 'r' && computerChoice === 'sc'));
 }
 
 function computeComputerAsWinner(choice, computerChoice) {
-  return ((choice === 'scissors' && computerChoice === 'rock') ||
-    (choice === 'scissors' && computerChoice === 'spock') ||
-    (choice === 'paper' && computerChoice === 'scissors') ||
-    (choice === 'paper' && computerChoice === 'lizard') ||
-    (choice === 'rock' && computerChoice === 'paper') ||
-    (choice === 'rock' && computerChoice === 'spock') ||
-    (choice === 'lizard' && computerChoice === 'rock') ||
-    (choice === 'lizard' && computerChoice === 'scissors') ||
-    (choice === 'spock' && computerChoice === 'lizard') ||
-    (choice === 'spock' && computerChoice === 'paper'));
+  return ((choice === 'sc' && computerChoice === 'r') ||
+    (choice === 'sc' && computerChoice === 'sp') ||
+    (choice === 'p' && computerChoice === 'sc') ||
+    (choice === 'p' && computerChoice === 'l') ||
+    (choice === 'r' && computerChoice === 'p') ||
+    (choice === 'r' && computerChoice === 'sp') ||
+    (choice === 'l' && computerChoice === 'r') ||
+    (choice === 'l' && computerChoice === 'sc') ||
+    (choice === 'sp' && computerChoice === 'l') ||
+    (choice === 'sp' && computerChoice === 'p'));
 }
 
 function displayWinner(choice, computerChoice) {
@@ -38,6 +39,37 @@ function displayWinner(choice, computerChoice) {
     prompt('Computer wins!');
   } else {
     prompt("It's a tie");
+  }
+}
+
+function computeWinner(choice, computerChoice) {
+  if (computePlayerAsWinner(choice, computerChoice)) {
+    return 'p';
+  } else if (computeComputerAsWinner(choice, computerChoice)) {
+    return 'c';
+  } else {
+    return 'd';
+  }
+}
+
+function displayGrandWinner(playerScore, computerScore) {
+  if (playerScore === WINS) {
+    prompt(`Congrats! You are the grand winner with ${WINS} wins! :D`);
+  } else if (computerScore === WINS) {
+    prompt(`Computer became the grand winner with ${WINS} wins :(`);
+  } else {
+    prompt(`The score for player is: ${playerScore} and the score for computer is ${computerScore}`);
+  }
+}
+
+let playerScore = 0;
+let computerScore = 0;
+
+function updateScore(input) {
+  if (input === 'p') {
+    playerScore += 1;
+  } else if (input === 'c') {
+    computerScore += 1;
   }
 }
 
@@ -56,6 +88,12 @@ while (true) {
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
   displayWinner(choice, computerChoice);
+
+  let playerOrComputer = computeWinner(choice, computerChoice);
+  // TODO: solve issue with score not being reset after 5 wins
+  updateScore(playerOrComputer);
+
+  displayGrandWinner(playerScore, computerScore);
 
   prompt('Do you want to play again (y/n)?');
   let answer = readline.question().toLowerCase();
