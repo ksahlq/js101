@@ -50,7 +50,7 @@ while (true) {
     choice = readline.question();
   }
 
-  let randomIndex = Math.ceil(Math.random() * VALID_CHOICES.length);
+  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
   let computerChoice = VALID_CHOICES[randomIndex];
 
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
