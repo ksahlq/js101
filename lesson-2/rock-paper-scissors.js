@@ -42,35 +42,33 @@ function displayWinner(choice, computerChoice) {
   }
 }
 
-function computeWinner(choice, computerChoice) {
-  if (computePlayerAsWinner(choice, computerChoice)) {
-    return 'p';
-  } else if (computeComputerAsWinner(choice, computerChoice)) {
-    return 'c';
-  } else {
-    return 'd';
-  }
-}
-
 function displayGrandWinner(playerScore, computerScore) {
   if (playerScore === WINS) {
     prompt(`Congrats! You are the grand winner with ${WINS} wins! :D`);
+    resetScore();
   } else if (computerScore === WINS) {
     prompt(`Computer became the grand winner with ${WINS} wins :(`);
+    resetScore();
   } else {
-    prompt(`The score for player is: ${playerScore} and the score for computer is ${computerScore}`);
+    prompt(`The score for player is: ${playerScore} and the score for computer is: ${computerScore}`);
   }
 }
+
 
 let playerScore = 0;
 let computerScore = 0;
 
-function updateScore(input) {
-  if (input === 'p') {
+function updateScore(choice, computerChoice) {
+  if (computePlayerAsWinner(choice, computerChoice)) {
     playerScore += 1;
-  } else if (input === 'c') {
+  } else if (computeComputerAsWinner(choice, computerChoice)) {
     computerScore += 1;
   }
+}
+
+function resetScore() {
+  playerScore = 0;
+  computerScore = 0;
 }
 
 while (true) {
@@ -89,17 +87,17 @@ while (true) {
 
   displayWinner(choice, computerChoice);
 
-  let playerOrComputer = computeWinner(choice, computerChoice);
-  // TODO: solve issue with score not being reset after 5 wins
-  updateScore(playerOrComputer);
+  updateScore(choice, computerChoice);
 
   displayGrandWinner(playerScore, computerScore);
 
   prompt('Do you want to play again (y/n)?');
   let answer = readline.question().toLowerCase();
+
   while (answer[0] !== 'n' && answer[0] !== 'y') {
     prompt('Please enter "y" or "n"');
     answer = readline.question().toLowerCase();
   }
+
   if (answer[0].toLowerCase() !== 'y') break;
 }
