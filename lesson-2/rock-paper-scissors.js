@@ -54,30 +54,46 @@ function displayGrandWinner(playerScore, computerScore) {
   }
 }
 
+function playAgain() {
+  prompt('Do you want to play again (y/n)?');
+  let answer = readline.question().toLowerCase();
 
-let playerScore = 0;
-let computerScore = 0;
+  while (answer !== 'n' && answer !== 'y') {
+    prompt('Please enter "y" or "n"');
+    answer = readline.question().toLowerCase();
+  }
+  return answer.toLowerCase() !== 'n';
+}
+
+function clearScreen() {
+  console.clear();
+}
+
+let score = { player: 0, computer: 0 };
 
 function updateScore(choice, computerChoice) {
   if (computePlayerAsWinner(choice, computerChoice)) {
-    playerScore += 1;
+    score.player += 1;
   } else if (computeComputerAsWinner(choice, computerChoice)) {
-    computerScore += 1;
+    score.computer += 1;
   }
 }
 
 function resetScore() {
-  playerScore = 0;
-  computerScore = 0;
+  score.player = 0;
+  score.computer = 0;
 }
 
 while (true) {
+  prompt('Greetings! You are now playing the legendary game: Rock, Paper, Scissors, Spock, Lizard!');
+  prompt('You need a total score of 5 matches in order to win. Good luck! :)');
+
   prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
-  let choice = readline.question();
+  let choice = readline.question().toLowerCase();
 
   while (!VALID_CHOICES.includes(choice)) {
     prompt("That's not a valid choice");
-    choice = readline.question();
+    choice = readline.question().toLowerCase();
   }
 
   let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
@@ -89,15 +105,11 @@ while (true) {
 
   updateScore(choice, computerChoice);
 
-  displayGrandWinner(playerScore, computerScore);
+  displayGrandWinner(score.player, score.computer);
 
-  prompt('Do you want to play again (y/n)?');
-  let answer = readline.question().toLowerCase();
-
-  while (answer[0] !== 'n' && answer[0] !== 'y') {
-    prompt('Please enter "y" or "n"');
-    answer = readline.question().toLowerCase();
+  if (playAgain()) {
+    clearScreen();
+  } else {
+    break;
   }
-
-  if (answer[0].toLowerCase() !== 'y') break;
 }
