@@ -11,8 +11,29 @@ function crunch(string) {
   return crunchText;
 }
 
-console.log(crunch('ddaaiillyy ddoouubbllee'));
-console.log(crunch('4444abcabccba'));
-console.log(crunch('ggggggggggggggg'));
-console.log(crunch('a'));
-console.log(crunch(''));
+function crunch_2(string) {
+  let char = string.split('');
+  let newString = "";
+  char.forEach((element, index) => {
+    if (element !== string[index + 1]) {
+      newString += element;
+    }
+  });
+  return newString;
+}
+
+console.log(
+  crunch('ddaaiillyy ddoouubbllee'),
+  crunch('4444abcabccba'),
+  crunch('ggggggggggggggg'),
+  crunch('a'),
+  crunch(''),
+);
+
+console.log(
+  crunch_2('ddaaiillyy ddoouubbllee'),
+  crunch_2('4444abcabccba'),
+  crunch_2('ggggggggggggggg'),
+  crunch_2('a'),
+  crunch_2('')
+);
