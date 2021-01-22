@@ -1,5 +1,7 @@
 function wordSizes(words) {
-  let wordsArray = words.split(' ');
+  let onlyLetters = words.replace(/[^a-z\s]/gi, '');
+
+  let wordsArray = onlyLetters.split(' ');
   let count = {};
 
   for (let i = 0; i < wordsArray.length; i += 1) {
