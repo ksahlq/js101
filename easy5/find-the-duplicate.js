@@ -1,32 +1,29 @@
-/* 
-Understand the problem
-  - Input:
-    - an array of integers
-  - Output:
-    - an integer value which indicates the dublicate value
-  - Rules:
-    - Exactly one value is duplicate
-
-Data structure:
-  - array
-
-Algorithm
-1. iterate through the input array
-2. for each value in array, make a comparison with the rest of the values in the array, excluding the current value.
-  a. if true, return value and stop searching
-  b. else continue
-
-"2. for each value in array, make a comparison with all values in the array"
-
- */
-
 function findDup(searchArray) {
-  searchArray.forEach(value => {
-    if (searchArray.includes(value)) {
-      console.log(value);
-      return value;
+  let seen = {};
+
+  for (let i = 0; i < searchArray.length; i += 1) {
+    if (seen[searchArray[i]]) {
+      return searchArray[i];
+    } else {
+      seen[searchArray[i]] = true;
     }
-  });
+  }
+  return undefined;
+}
+
+// alternative solution
+function count(array, element) {
+  let count = 0;
+  for (let idx = 0; idx < array.length; idx++) {
+    if (array[idx] === element) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+function findDup(array) {
+  return array.find(element => count(array, element) === 2);
 }
 
 console.log(
