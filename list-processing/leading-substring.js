@@ -1,12 +1,27 @@
-/*
-Understand the problem:
-  - Input:
-    - string argument
-  - Output:
-    - array of all substrings from the beginning of the string
-  Rules:
-    - order from shortest to longest
+function leadingSubstrings(string) {
+  let subStrings = [];
+  let letters = string.split('');
+  let index = 0;
+  let res = "";
 
-Data structure;
-  - arrays
- */
+  do {
+    res += letters[index];
+    subStrings.push(res);
+    index += 1;
+
+  } while (index < string.length);
+  return subStrings;
+}
+
+function leadingSubstrings_2(string) {
+  let letters = string.split('');
+  let res = "";
+
+  return letters.map((char) => res += char);
+}
+
+console.log(
+  leadingSubstrings_2('abc'),
+  leadingSubstrings_2('a'),
+  leadingSubstrings_2('xyzzy')
+);
