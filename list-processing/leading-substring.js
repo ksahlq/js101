@@ -13,15 +13,16 @@ function leadingSubstrings(string) {
   return subStrings;
 }
 
-function leadingSubstrings_2(string) {
+// alternative solution
+function leadingSubstrings(string) {
   let letters = string.split('');
   let res = "";
 
-  return letters.map((char) => res += char);
+  return letters.map(char => res += char);
 }
 
 console.log(
-  leadingSubstrings_2('abc'),
-  leadingSubstrings_2('a'),
-  leadingSubstrings_2('xyzzy')
+  leadingSubstrings('abc'),
+  leadingSubstrings('a'),
+  leadingSubstrings('xyzzy')
 );
