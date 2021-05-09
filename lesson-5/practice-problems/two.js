@@ -6,6 +6,10 @@ let books = [
   { title: 'The Book of Kells', author: 'Multiple Authors', published: '800' },
 ];
 
-books.map(object => {
-  return Object.value(object).sort
-})
+const values = books.sort((a, b) => {
+  return Number(a.published) - Number(b.published);
+});
+
+console.log(
+  values
+);
