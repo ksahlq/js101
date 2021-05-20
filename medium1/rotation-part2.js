@@ -1,20 +1,17 @@
-/* Understand the problem
-  - Input:
-    - two inputs
-      1. digit
-      2. number of rotations to perform
-  - Output:
-    - rotated numbers
+function rotateRightmostDigits(number, count) {
+  let digits = number.toString().split('');
+  let remove = digits.length - count;
+  let removedElement = digits.splice(remove, 1)[0];
 
-Test cases:
-  rotateRightmostDigits(735291, 1);      // 735291
-  rotateRightmostDigits(735291, 2);      // 735219
-  rotateRightmostDigits(735291, 3);      // 735912
-  rotateRightmostDigits(735291, 4);      // 732915
-  rotateRightmostDigits(735291, 5);      // 752913
-  rotateRightmostDigits(735291, 6);      // 352917
+  digits.push(removedElement);
+  return Number(digits.join(''));
+}
 
-Data structure:
-
-Algorithm:
-*/
+console.log(
+  rotateRightmostDigits(735291, 1),
+  rotateRightmostDigits(735291, 2),
+  rotateRightmostDigits(735291, 3),
+  rotateRightmostDigits(735291, 4),
+  rotateRightmostDigits(735291, 5),
+  rotateRightmostDigits(735291, 6),
+);
