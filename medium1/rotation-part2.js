@@ -1,9 +1,9 @@
 function rotateRightmostDigits(number, count) {
   let digits = number.toString().split('');
-  let remove = digits.length - count;
-  let removedElement = digits.splice(remove, 1)[0];
+  let removeIdx = digits.length - count;
+  let removed = digits.splice(removeIdx, 1)[0];
 
-  digits.push(removedElement);
+  digits.push(removed);
   return Number(digits.join(''));
 }
 
