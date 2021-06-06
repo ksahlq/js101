@@ -40,11 +40,29 @@ function emptySquares(board) {
   return Object.keys(board).filter(key => board[key] === INITIAL_MARKER);
 }
 
+function joinOr(board, delimiter = ', ', lastWord = 'or ') {
+  let arr = emptySquares(board);
+  let lastIndex = arr.length - 1;
+  let output = "";
+
+  for (let idx = 0; idx < arr.length; idx += 1) {
+    if (idx === lastIndex) {
+      output += lastWord + String(arr[idx]);
+      break;
+    } else if (arr.length < 2) {
+      output += String(arr[idx]) + delimiter;
+      break;
+    }
+    output += String(arr[idx]) + delimiter;
+  }
+  return output;
+}
+
 function playerChoosesSquare(board) {
   let square;
 
   while (true) {
-    prompt(`Choose a square (${emptySquares(board).join(', ')}):`);
+    prompt(`Choose a square (${joinOr(board)}):`);
     square = readline.question().trim();
 
     if (emptySquares(board).includes(square)) break;
@@ -125,3 +143,20 @@ while (true) {
 }
 
 prompt('Thanks for playing Tic Tac Toe!');
+
+/*
+Understand the problem
+  - Input:
+    - array of empty squares and/or delimiter
+  - Output:
+   - string of elements seperated by inserted delimiter. Default is ','
+  - Rules:
+   -
+
+Data structure:
+  - array
+
+Algorithm:
+1. iterate through each element of array input
+2.
+*/
