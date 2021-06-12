@@ -40,20 +40,19 @@ function emptySquares(board) {
   return Object.keys(board).filter(key => board[key] === INITIAL_MARKER);
 }
 
-function joinOr(board, delimiter = ', ', lastWord = 'or ') {
-  let arr = emptySquares(board);
-  let lastIndex = arr.length - 1;
+function joinOr(board, delimiter = ', ', andOr = 'or ') {
+  let numbers = emptySquares(board);
+  let lastIdx = numbers.length - 1;
   let output = "";
 
-  for (let idx = 0; idx < arr.length; idx += 1) {
-    if (idx === lastIndex) {
-      output += lastWord + String(arr[idx]);
-      break;
-    } else if (arr.length < 2) {
-      output += String(arr[idx]) + delimiter;
-      break;
+  for (let idx = 0; idx < numbers.length; idx += 1) {
+    if (idx === lastIdx) {
+      output += ' ' + numbers[idx];
+    } else if (idx === lastIdx - 1) {
+      output += numbers[idx] + delimiter + andOr;
+    } else {
+      output += numbers[idx] + delimiter;
     }
-    output += String(arr[idx]) + delimiter;
   }
   return output;
 }
